@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
         //checking if a user is already logged in or not
@@ -57,8 +59,6 @@ public class MainActivity extends AppCompatActivity {
             finish();
             startActivity(new Intent(MainActivity.this, SecondActivity.class));
         }
-
-
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +77,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
+
 
     // Signing in with email and password
     // with a progress dialog
@@ -108,4 +112,23 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
+
+    // checking email verification for user to recieve a verify email
+
+    private void checkEmailVerification(){
+        FirebaseUser firebaseUser = firebaseAuth.getInstance().getCurrentUser();
+        Boolean emailflag = firebaseUser.isEmailVerified();
+
+        if(emailflag) {
+            startActivity(new Intent(MainActivity.this, SecondActivity.class));
+        }else{
+            Toast.makeText(this, "Verify your email", Toast.LENGTH_SHORT).show();
+            firebaseAuth.signOut();
+        }
+    }
+
 }
