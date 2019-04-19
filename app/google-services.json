@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "156546488477",
+    "firebase_url": "https://jumpscan-5a6f5.firebaseio.com",
+    "project_id": "jumpscan-5a6f5",
+    "storage_bucket": "jumpscan-5a6f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156546488477:android:82fcbfecb8f6f826",
+        "android_client_info": {
+          "package_name": "vision.google.com.jumpscan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDavTL53Vl6hA_yP012wYrjiEGkcgj8Eg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "156546488477-9cuh8vkefaq5k0f3pcndi86c5rubd5v0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
