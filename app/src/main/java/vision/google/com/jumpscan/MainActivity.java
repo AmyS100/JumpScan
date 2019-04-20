@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView userRegistration;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
+    private TextView forgotPassword;
 
 
     @Override
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         Info = (TextView) findViewById(R.id.tvInfo);
         Login = (Button)findViewById(R.id.btnLogin);
         userRegistration = (TextView)findViewById(R.id.tvRegister);
+        forgotPassword = (TextView)findViewById(R.id.tvForgotPassword);
+
 
         Info.setText("No of attempts remaining: 5");
 
@@ -49,10 +52,9 @@ public class MainActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
 
 
-
-
-
         FirebaseUser user = firebaseAuth.getCurrentUser();
+
+
 
         //checking if a user is already logged in or not
         if(user != null){
@@ -76,6 +78,17 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, RegistrationActivity.class));
             }
         });
+
+
+        // this is the function when the user is on the Login page and wants to reset there password
+        //it will bring the user back to the password activity page (Register Activity)
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, PasswordActivity.class));
+            }
+        });
+
     }
 
 
