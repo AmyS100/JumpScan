@@ -2,6 +2,7 @@ package vision.google.com.jumpscan;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +32,9 @@ public class UpdateProfile extends AppCompatActivity {
         newUserEmail = findViewById(R.id.etEmailUpdate);
         newUserAge = findViewById(R.id.etAgeUpdate);
         save = findViewById(R.id.btnSave);
+
+            //Arrow mark at the top of the pages
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -67,5 +71,16 @@ public class UpdateProfile extends AppCompatActivity {
             }
         });
 
+    }
+
+    // when the arrow is clicked at the top it this is the code which will bring the page to the previous page
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
