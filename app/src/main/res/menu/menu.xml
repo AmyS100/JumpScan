@@ -11,10 +11,10 @@
         />
 
     <item
-        android:id="@+id/settingttMenu"
+        android:id="@+id/profileMenu"
         android:orderInCategory="200"
         app:showAsAction="always"
-        android:title="Settings"
+        android:title="Profile"
         />
 
     <item

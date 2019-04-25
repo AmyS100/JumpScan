@@ -19,13 +19,14 @@ public class UpdatePassword extends AppCompatActivity {
     private Button update;
     private EditText newPassword;
     private FirebaseUser firebaseUser;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_password);
 
-        update = (Button)findViewById(R.id.btnChangePassword);
+        update = (Button)findViewById(R.id.btnUpdatePassword);
         newPassword = (EditText)findViewById(R.id.etNewPassword);
 
         //Arrow mark at the top of the pages
@@ -39,33 +40,24 @@ public class UpdatePassword extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //creating the new password
                 String userPasswordNew = newPassword.getText().toString();
                 firebaseUser.updatePassword(userPasswordNew).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(UpdatePassword.this, "Password Update Changed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpdatePassword.this, "Password Changed", Toast.LENGTH_SHORT).show();
                             finish();
                         }else{
                             Toast.makeText(UpdatePassword.this, "Password Update Failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+
             }
         });
 
-        //getting the new password and allowing the user to save it
-        firebaseUser.updatePassword(userPasswordNew).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(UpdatePassword.this, "Password Update Changed", Toast.LENGTH_SHORT).show();
-                    finish();
-                }else{
-                    Toast.makeText(UpdatePassword.this, "Password Update Failed", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     // when the arrow is clicked at the top it this is the code which will bring the page to the previous page

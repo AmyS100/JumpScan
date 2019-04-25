@@ -59,14 +59,12 @@ public class RegistrationActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 //sendEmailVerification();
                                 sendUserData();
+                                firebaseAuth.signOut();
                                 Toast.makeText(RegistrationActivity.this, "Successfully Registered, Upload Complete", Toast.LENGTH_SHORT).show();
                                 finish();
                                 startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
-
-                            }
-                            else
-                            {
-                                Toast.makeText(RegistrationActivity.this,"Registration Failed", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(RegistrationActivity.this,"Registration Failed You already created an account", Toast.LENGTH_SHORT).show();
 
                             }
                         }
@@ -130,10 +128,11 @@ public class RegistrationActivity extends AppCompatActivity {
             firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
+
                     if(task.isSuccessful()){
                         sendUserData();
-                        firebaseAuth.signOut();
                         Toast.makeText(RegistrationActivity.this, "Successfully Registered, Verification Email has been sent", Toast.LENGTH_SHORT).show();
+                        firebaseAuth.signOut();
                         finish();
                         startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
                     }else{

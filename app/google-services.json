@@ -13,7 +13,20 @@
           "package_name": "vision.google.com.jumpscan"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "156546488477-bcfd2tvp7434iqpbsrmiajs7s1tvfn0e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vision.google.com.jumpscan",
+            "certificate_hash": "27d4bfe138a4a7fe3d7c46f845e8e4d4e23b6958"
+          }
+        },
+        {
+          "client_id": "156546488477-9cuh8vkefaq5k0f3pcndi86c5rubd5v0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCDavTL53Vl6hA_yP012wYrjiEGkcgj8Eg"
