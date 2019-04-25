@@ -28,12 +28,12 @@ public class UpdateProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
 
-        newUserName = findViewById(R.id.etNameUpdate);
-        newUserEmail = findViewById(R.id.etEmailUpdate);
-        newUserAge = findViewById(R.id.etAgeUpdate);
-        save = findViewById(R.id.btnSave);
+        newUserName = (EditText) findViewById(R.id.etNameUpdate);
+        newUserEmail = (EditText) findViewById(R.id.etEmailUpdate);
+        newUserAge = (EditText) findViewById(R.id.etAgeUpdate);
+        save = (Button) findViewById(R.id.btnSave);
 
-            //Arrow mark at the top of the pages
+        //Arrow mark at the top of the pages
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
@@ -47,7 +47,7 @@ public class UpdateProfile extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
-               newUserName.setText(userProfile.getUserName());
+                newUserName.setText(userProfile.getUserName());
                 newUserAge.setText(userProfile.getUserAge());
                 newUserEmail.setText(userProfile.getUserEmail());
             }
@@ -68,6 +68,8 @@ public class UpdateProfile extends AppCompatActivity {
 
                 UserProfile userProfile = new UserProfile(age, email, name);
                 databaseReference.setValue(userProfile);
+                finish();
+                Toast.makeText(UpdateProfile.this, "Update Saved!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -77,7 +79,7 @@ public class UpdateProfile extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
         }
