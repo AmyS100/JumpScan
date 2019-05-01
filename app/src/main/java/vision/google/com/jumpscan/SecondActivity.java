@@ -11,8 +11,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -28,6 +34,9 @@ public class SecondActivity extends AppCompatActivity {
     Button btnGenerate;
     ImageView imageCode;
     String text2QR;
+    String user_email;
+
+    private FirebaseDatabase firebaseDatabase;
 
 
     @Override
@@ -41,6 +50,39 @@ public class SecondActivity extends AppCompatActivity {
         genField = (EditText)findViewById(R.id.etGenerateField);
         btnGenerate = (Button)findViewById(R.id.btnGenerate);
         imageCode = (ImageView)findViewById(R.id.ivImageCode);
+
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
+
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
+
+                user_email = (userProfile.getUserEmail());
+                Toast.makeText(SecondActivity.this, user_email, Toast.LENGTH_SHORT).show();
+                MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+                try{
+                    BitMatrix bitMatrix = multiFormatWriter.encode(user_email, BarcodeFormat.QR_CODE,200,200);
+                    BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+                    Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+                    imageCode.setImageBitmap(bitmap);
+                }
+                catch (WriterException e){
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(SecondActivity.this, databaseError.getCode(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
 
         btnGenerate.setOnClickListener(new View.OnClickListener() {
             @Override
