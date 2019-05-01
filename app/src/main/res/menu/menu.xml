@@ -18,10 +18,17 @@
         />
 
     <item
-        android:id="@+id/refreshMenu"
+        android:id="@+id/readerMenu"
         android:orderInCategory="300"
         app:showAsAction="always"
-        android:title="Refresh"
+        android:title="Reader"
+        />
+
+    <item
+        android:id="@+id/paymentMenu"
+        android:orderInCategory="300"
+        app:showAsAction="always"
+        android:title="Payment"
         />
 
 

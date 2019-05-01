@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileActivity extends AppCompatActivity {
 
     private ImageView logoPic;
-    private TextView profileName, profileAge, profileEmail;
+    private TextView profileName,profileAge, profileEmail;
     private Button profileUpdate, changePassword;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
