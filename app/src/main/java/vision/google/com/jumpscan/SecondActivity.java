@@ -30,11 +30,10 @@ public class SecondActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private Button logout;
-    EditText genField;
-    Button btnGenerate;
     ImageView imageCode;
     String text2QR;
     String user_email;
+    private Button scan;
 
     private FirebaseDatabase firebaseDatabase;
 
@@ -46,17 +45,18 @@ public class SecondActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        logout = (Button)findViewById(R.id.btnLogOut);
-        genField = (EditText)findViewById(R.id.etGenerateField);
-        btnGenerate = (Button)findViewById(R.id.btnGenerate);
-        imageCode = (ImageView)findViewById(R.id.ivImageCode);
+        logout = (Button) findViewById(R.id.btnLogOut);
+        imageCode = (ImageView) findViewById(R.id.ivImageCode);
+        scan = (Button) findViewById(R.id.btnScan);
 
 
+        //creating an instance of itself
         firebaseDatabase = FirebaseDatabase.getInstance();
-
         final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
 
-
+        // when the user enters their email from the registration process
+        // the database is retreiving the email address and creating the format and code behind the QR code
+        // the QR code is then turned into an image which whill show the unique QR Code suited to each individual
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -65,13 +65,12 @@ public class SecondActivity extends AppCompatActivity {
                 user_email = (userProfile.getUserEmail());
                 Toast.makeText(SecondActivity.this, user_email, Toast.LENGTH_SHORT).show();
                 MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-                try{
-                    BitMatrix bitMatrix = multiFormatWriter.encode(user_email, BarcodeFormat.QR_CODE,200,200);
+                try {
+                    BitMatrix bitMatrix = multiFormatWriter.encode(user_email, BarcodeFormat.QR_CODE, 200, 200);
                     BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
                     Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
                     imageCode.setImageBitmap(bitmap);
-                }
-                catch (WriterException e){
+                } catch (WriterException e) {
                     e.printStackTrace();
                 }
             }
@@ -82,45 +81,7 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
 
-
-
-        btnGenerate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                text2QR = genField.getText().toString().trim();
-                MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-                try{
-                    BitMatrix bitMatrix = multiFormatWriter.encode(text2QR, BarcodeFormat.QR_CODE,200,200);
-                    BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-                    Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-                    imageCode.setImageBitmap(bitmap);
-                }
-                catch (WriterException e){
-                    e.printStackTrace();
-                }
-            }
-        });
-
-
-
-      /*  btnGenerate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-                try{
-                    BitMatrix bitMatrix = multiFormatWriter.encode("text2QR", BarcodeFormat.QR_CODE, 200,200);
-                    BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-                    Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-                    imageCode.setImageBitmap(bitmap);
-                }
-                catch (WriterException e){
-                    e.printStackTrace();
-                }
-            }
-        }); */
-
-
-
+        //logout button
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,6 +89,7 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
     }
+
 
     // Logout from database and bringing user to main Activity
     private void Logout() {
@@ -147,14 +109,17 @@ public class SecondActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.logoutMenu: {
                 Logout();
             }
             case R.id.profileMenu:
                 startActivity(new Intent(SecondActivity.this, ProfileActivity.class));
+                return true;
             case R.id.readerMenu:
-                startActivity(new Intent (SecondActivity.this, ReaderActivity.class));
+                startActivity(new Intent(SecondActivity.this, ReaderActivity.class));
+            case R.id.topupMenu:
+                startActivity(new Intent(SecondActivity.this, TopUpActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

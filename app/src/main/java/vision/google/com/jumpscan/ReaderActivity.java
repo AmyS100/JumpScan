@@ -29,6 +29,9 @@ public class ReaderActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+        //when the scan button is clicked
+        // it chooses QR format
+        //it then scans the qr code
         final Activity activity = this;
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +48,7 @@ public class ReaderActivity extends AppCompatActivity {
 
     }
 
+    // this is the function when the scan button is cancelled.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);

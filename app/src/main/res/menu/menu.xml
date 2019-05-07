@@ -13,23 +13,25 @@
     <item
         android:id="@+id/profileMenu"
         android:orderInCategory="200"
-        app:showAsAction="always"
+        app:showAsAction="never"
         android:title="Profile"
         />
 
     <item
         android:id="@+id/readerMenu"
         android:orderInCategory="300"
-        app:showAsAction="always"
+        app:showAsAction="never"
         android:title="Reader"
         />
 
     <item
-        android:id="@+id/paymentMenu"
+        android:id="@+id/topupMenu"
         android:orderInCategory="300"
-        app:showAsAction="always"
-        android:title="Payment"
+        app:showAsAction="never"
+        android:title="TopUp"
         />
+
+
 
 
 </menu>

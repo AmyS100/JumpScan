@@ -40,9 +40,10 @@ public class UpdateProfile extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
 
+        // retrieves the info from the Uid
         final DatabaseReference databaseReference = firebaseDatabase.getReference(firebaseAuth.getUid());
 
-
+        // setting the users new name, age and email
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -58,7 +59,7 @@ public class UpdateProfile extends AppCompatActivity {
             }
         });
 
-
+        // save button is saving the new info back to the database which will also show on the new profile screen
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

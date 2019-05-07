@@ -144,6 +144,8 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
 
+
+        // this is being able to tell whos account is who from the database by the Uid.
     private void sendUserData(){
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = firebaseDatabase.getReference(firebaseAuth.getUid());
